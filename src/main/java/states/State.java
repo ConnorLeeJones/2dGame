@@ -1,6 +1,7 @@
 package states;
 
 import main.Game;
+import main.Handler;
 
 import java.awt.*;
 
@@ -19,10 +20,10 @@ public abstract class State {
         return currentState;
     }
 
-    protected Game game;
+    protected Handler handler;
 
-    public State(Game game) {
-        this.game = game;
+    public State(Handler handler) {
+        this.handler = handler;
     }
 
 
