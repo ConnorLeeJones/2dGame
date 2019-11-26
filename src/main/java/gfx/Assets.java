@@ -8,13 +8,16 @@ public class Assets {
     private static final int width62 = 62, height62 = 62;
 
 
-    public static BufferedImage player, dirt, grass, stone, sand, stone2, stone3;
+    public static BufferedImage player, dirt, grass, stone, sand, stone2, stone3, rock, tree;
     public static BufferedImage[] playerDown, playerUp, playerLeft, playerRight;
+    public static BufferedImage[] startButton;
 
     public static void init(){
-        SpriteSheet playerSprites = new SpriteSheet(ImageLoader.loadImage("/textures/sprite_sheet.png"));
+        //SpriteSheet playerSprites = new SpriteSheet(ImageLoader.loadImage("/textures/sprite_sheet.png"));
         SpriteSheet playerSprites2 = new SpriteSheet(ImageLoader.loadImage("/textures/walking_sprites_right.png"));
         SpriteSheet playerSpritesLeft = new SpriteSheet(ImageLoader.loadImage("/textures/walking_sprites_left.png"));
+        SpriteSheet entitySprites = new SpriteSheet(ImageLoader.loadImage("/textures/tree&rock.png"));
+        SpriteSheet start = new SpriteSheet(ImageLoader.loadImage("/textures/start_button.png"));
 
 
         SpriteSheet textures = new SpriteSheet(ImageLoader.loadImage("/textures/master-tileset.png"));
@@ -25,6 +28,7 @@ public class Assets {
         playerUp = new BufferedImage[2];
         playerRight = new BufferedImage[2];
         playerLeft = new BufferedImage[2];
+        startButton = new BufferedImage[2];
         playerDown[0] = playerSprites2.crop(width32 * 5, 0, width32, height32);
         playerDown[1] = playerSprites2.crop(width32 * 6, 0, width32, height32);
         playerUp[0] = playerSprites2.crop(width32 * 2, 0, width32, height32);
@@ -34,6 +38,14 @@ public class Assets {
         playerLeft[0] = playerSpritesLeft.crop(width32, 0, width32, height32);
         playerLeft[1] = playerSpritesLeft.crop(width32 * 2, 0, width32, height32);
 
+
+        startButton[0] = start.crop(0, 0, width32 * 2, height32);
+        startButton[1] = start.crop(width32 * 2, 0, width32 * 2, height32);
+
+
+
+        rock = entitySprites.crop(width32 * 8, 0, width32, height32);
+        tree = entitySprites.crop(width32 * 9, 0, width32, height32);
 
 
         stone = textures.crop(0, 0, width62, height62);

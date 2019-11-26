@@ -5,6 +5,7 @@ import entities.creatures.Player;
 import gfx.Assets;
 import gfx.GameCamera;
 import input.KeyManager;
+import input.MouseManager;
 import states.GameState;
 import states.MenuState;
 import states.State;
@@ -26,11 +27,12 @@ public class Game implements Runnable {
 
 
     //states
-    private State gameState;
-    private State menuState;
+    public State gameState;
+    public State menuState;
 
     //input
     private KeyManager keyManager;
+    private MouseManager mouseManager;
 
     //camera
     private GameCamera gameCamera;
@@ -45,6 +47,7 @@ public class Game implements Runnable {
         this.width = width;
         this.height = height;
         keyManager = new KeyManager();
+        mouseManager = new MouseManager();
     }
 
 
@@ -52,6 +55,10 @@ public class Game implements Runnable {
     private void init(){
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
+        display.getFrame().addMouseListener(mouseManager);
+        display.getFrame().addMouseMotionListener(mouseManager);
+        display.getCanvas().addMouseListener(mouseManager);
+        display.getCanvas().addMouseMotionListener(mouseManager);
         Assets.init();
 
         handler = new Handler(this);
@@ -60,7 +67,7 @@ public class Game implements Runnable {
 
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
-        State.setState(gameState);
+        State.setState(menuState);
     }
 
 
@@ -118,7 +125,7 @@ public class Game implements Runnable {
             }
 
             if (timer >= 1000000000){
-                System.out.println("Ticks + frames: " + ticks);
+                //System.out.println("Ticks + frames: " + ticks);
                 ticks = 0;
                 timer = 0;
             }
@@ -131,6 +138,10 @@ public class Game implements Runnable {
 
     public KeyManager getKeyManager() {
         return keyManager;
+    }
+
+    public MouseManager getMouseManager() {
+        return mouseManager;
     }
 
     public GameCamera getGameCamera() {
@@ -165,4 +176,6 @@ public class Game implements Runnable {
     public int getHeight() {
         return height;
     }
+
+
 }
