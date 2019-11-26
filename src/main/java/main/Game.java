@@ -1,6 +1,7 @@
 package main;
 
 import display.Display;
+import entities.creatures.Player;
 import gfx.Assets;
 import gfx.GameCamera;
 import input.KeyManager;
@@ -48,14 +49,14 @@ public class Game implements Runnable {
 
 
 
-
     private void init(){
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
         Assets.init();
 
-        gameCamera = new GameCamera(this,0, 0);
         handler = new Handler(this);
+
+        gameCamera = new GameCamera(handler,0, 0);
 
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
@@ -82,6 +83,7 @@ public class Game implements Runnable {
         //clear screen
         g.clearRect(0, 0, width, height);
         //draw
+
 
 
         if(State.getState() != null){

@@ -1,12 +1,18 @@
 package entities.creatures;
 
+import gfx.Animation;
 import gfx.Assets;
 import main.Game;
 import main.Handler;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Player extends Creature {
+
+
+    //animations
+    private Animation animDown, animUp, animLeft, animRight;
 
 
     public Player(Handler handler, float x, float y) {
@@ -15,13 +21,23 @@ public class Player extends Creature {
 
         //players bounding box, customize
         bounds.x = 16;
-        bounds.y = 32;
+        bounds.y = 40;
         bounds.width = 24;
         bounds.height = 24;
+
+        //animations
+        animDown = new Animation(250, Assets.playerDown);
+        animUp = new Animation(250, Assets.playerUp);
+        animLeft = new Animation(250, Assets.playerLeft);
+        animRight = new Animation(250, Assets.playerRight);
 
     }
 
     public void tick() {
+        animDown.tick();
+        animUp.tick();
+        animLeft.tick();
+        animRight.tick();
         getInput();
         move();
         handler.getGameCamera().centerOnEntity(this);
@@ -44,14 +60,30 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.player, (int) (x - handler.getGameCamera().getxOffset()),
+        g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
 
         //show bounding box
-        g.setColor(Color.red);
-        g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
-                (int) (y + bounds.y - handler.getGameCamera().getyOffset()),
-                bounds.width, bounds.height);
+
+//        g.setColor(Color.red);
+//        g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
+//                (int) (y + bounds.y - handler.getGameCamera().getyOffset()),
+//                bounds.width, bounds.height);
+    }
+
+
+    private BufferedImage getCurrentAnimationFrame(){
+        if (xMove < 0){
+            return  animLeft.getCurrentFrame();
+        } else if (xMove > 0){
+            return animRight.getCurrentFrame();
+        } else if (yMove < 0){
+            return animUp.getCurrentFrame();
+        } else if (yMove > 0) {
+            return animDown.getCurrentFrame();
+        } else {
+            return Assets.player;
+        }
     }
 }
