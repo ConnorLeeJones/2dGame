@@ -3,6 +3,7 @@ package worlds;
 import entities.Entity;
 import entities.EntityManager;
 import entities.creatures.Player;
+import entities.statics.Rock;
 import entities.statics.Tree;
 import main.Handler;
 import tiles.Tile;
@@ -24,6 +25,12 @@ public class World {
         this.handler = handler;
         entityManager = new EntityManager(handler, new Player(handler, 100, 100));
         entityManager.addEntity(new Tree(handler, 100, 250));
+        entityManager.addEntity(new Tree(handler, 400, 500));
+
+        entityManager.addEntity(new Rock(handler, 200, 350));
+        entityManager.addEntity(new Rock(handler, 500, 150));
+
+
         loadWorld(path);
 
         entityManager.getPlayer().setX(spawnX);

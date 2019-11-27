@@ -10,6 +10,7 @@ public class Assets {
 
     public static BufferedImage player, dirt, grass, stone, sand, stone2, stone3, rock, tree;
     public static BufferedImage[] playerDown, playerUp, playerLeft, playerRight;
+    public static BufferedImage[] playerAttackLeft, playerAttackRight, playerAttackUp, playerAttackDown;
     public static BufferedImage[] startButton;
 
     public static void init(){
@@ -18,6 +19,8 @@ public class Assets {
         SpriteSheet playerSpritesLeft = new SpriteSheet(ImageLoader.loadImage("/textures/walking_sprites_left.png"));
         SpriteSheet entitySprites = new SpriteSheet(ImageLoader.loadImage("/textures/tree&rock.png"));
         SpriteSheet start = new SpriteSheet(ImageLoader.loadImage("/textures/start_button.png"));
+        SpriteSheet attack = new SpriteSheet(ImageLoader.loadImage("/textures/attack_sprites.png"));
+
 
 
         SpriteSheet textures = new SpriteSheet(ImageLoader.loadImage("/textures/master-tileset.png"));
@@ -29,6 +32,11 @@ public class Assets {
         playerRight = new BufferedImage[2];
         playerLeft = new BufferedImage[2];
         startButton = new BufferedImage[2];
+        playerAttackLeft = new BufferedImage[1];
+        playerAttackRight = new BufferedImage[1];
+        playerAttackUp = new BufferedImage[1];
+        playerAttackDown = new BufferedImage[1];
+
         playerDown[0] = playerSprites2.crop(width32 * 5, 0, width32, height32);
         playerDown[1] = playerSprites2.crop(width32 * 6, 0, width32, height32);
         playerUp[0] = playerSprites2.crop(width32 * 2, 0, width32, height32);
@@ -41,6 +49,13 @@ public class Assets {
 
         startButton[0] = start.crop(0, 0, width32 * 2, height32);
         startButton[1] = start.crop(width32 * 2, 0, width32 * 2, height32);
+
+        playerAttackLeft[0] = attack.crop(0, 0, width32, height32);
+        playerAttackRight[0] = attack.crop(width32, 0, width32, height32);
+        playerAttackUp[0] = attack.crop(width32 * 3, 0, width32, height32);
+        playerAttackDown[0] = attack.crop(width32 * 4, 0, width32, height32);
+
+
 
 
 
