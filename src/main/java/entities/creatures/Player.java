@@ -8,6 +8,7 @@ import main.Game;
 import main.Handler;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class Player extends Creature {
@@ -16,8 +17,7 @@ public class Player extends Creature {
     //animations
     private Animation animDown, animUp, animLeft, animRight;
     private Animation attackDown, attackUp, attackLeft, attackRight;
-    private String attackString = null;
-    private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
+    private long lastAttackTimer, attackCooldown = 300, attackTimer = attackCooldown;
 
     private Inventory inventory;
 
@@ -59,7 +59,11 @@ public class Player extends Creature {
 
     private void checkAttacks(){
         attackTimer += System.currentTimeMillis() - lastAttackTimer;
+        lastAttackTimer = System.currentTimeMillis();
         if(attackTimer < attackCooldown)
+            return;
+
+        if(inventory.isActive())
             return;
 
         Rectangle cb = getCollisionBounds(0, 0);
@@ -71,19 +75,15 @@ public class Player extends Creature {
         if(handler.getKeyManager().aUp){
             ar.x = cb.x + cb.width / 2 - arSize / 2;
             ar.y = cb.y - arSize;
-            attackString = "up";
         } else if(handler.getKeyManager().aDown){
             ar.x = cb.x + cb.width / 2 - arSize / 2;
             ar.y = cb.y - arSize + cb.height;
-            attackString = "down";
         } else if(handler.getKeyManager().aLeft){
             ar.x = cb.x - arSize;
             ar.y = cb.y + cb.height / 2 - arSize / 2;
-            attackString = "left";
         } else if(handler.getKeyManager().aRight){
             ar.x = cb.x + cb.width;
             ar.y = cb.y + cb.height / 2 - arSize / 2;
-            attackString = "right";
         } else {
             return;
         }
@@ -124,6 +124,9 @@ public class Player extends Creature {
         xMove = 0;
         yMove = 0;
 
+        if(inventory.isActive())
+            return;
+
         if(handler.getKeyManager().up)
             yMove = -speed;
         if(handler.getKeyManager().down)
@@ -156,24 +159,15 @@ public class Player extends Creature {
     }
 
     private BufferedImage getCurrentAnimationFrame(){
-        if (attackString != null){
-            switch(attackString){
-                case "up":
-                    attackString = null;
-                    return attackUp.getCurrentFrame();
-                case "down":
-                    attackString = null;
-                    return attackDown.getCurrentFrame();
-                case "left":
-                    attackString = null;
-                    return attackLeft.getCurrentFrame();
-                default:
-                case "right":
-                    attackString = null;
-                    return attackRight.getCurrentFrame();
-            }
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)){
+            return attackUp.getCurrentFrame();
+        } else if(handler.getKeyManager().aDown){
+            return attackDown.getCurrentFrame();
+        } else if(handler.getKeyManager().aLeft){
+            return attackLeft.getCurrentFrame();
+        } else if(handler.getKeyManager().aRight){
+            return attackRight.getCurrentFrame();
         }
-
 
         if (xMove < 0){
             return  animLeft.getCurrentFrame();

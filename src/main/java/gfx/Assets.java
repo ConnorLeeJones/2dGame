@@ -1,11 +1,15 @@
 package gfx;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Assets {
 
     private static final int width32 = 32, height32 = 32;
     private static final int width62 = 62, height62 = 62;
+
+    public static Font font28, font48;
+
 
 
     public static BufferedImage player, dirt, grass, stone, sand, stone2, stone3, rock, tree, wood;
@@ -16,6 +20,8 @@ public class Assets {
 
     public static void init(){
         //SpriteSheet playerSprites = new SpriteSheet(ImageLoader.loadImage("/textures/sprite_sheet.png"));
+        font28 = FontLoader.loadFont("src/res/fonts/slkscr.ttf", 28);
+
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
 
         SpriteSheet playerSprites2 = new SpriteSheet(ImageLoader.loadImage("/textures/walking_sprites_right.png"));
