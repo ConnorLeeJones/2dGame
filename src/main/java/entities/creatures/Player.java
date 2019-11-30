@@ -3,6 +3,7 @@ package entities.creatures;
 import entities.Entity;
 import gfx.Animation;
 import gfx.Assets;
+import inventory.Inventory;
 import main.Game;
 import main.Handler;
 
@@ -18,6 +19,7 @@ public class Player extends Creature {
     private String attackString = null;
     private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
 
+    private Inventory inventory;
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
@@ -38,6 +40,8 @@ public class Player extends Creature {
         attackUp = new Animation(250, Assets.playerAttackUp);
         attackLeft = new Animation(250, Assets.playerAttackLeft);
         attackRight = new Animation(250, Assets.playerAttackRight);
+
+        inventory = new Inventory(handler);
     }
 
     public void tick() {
@@ -50,6 +54,7 @@ public class Player extends Creature {
         handler.getGameCamera().centerOnEntity(this);
         //attack
         checkAttacks();
+        inventory.tick();
     }
 
     private void checkAttacks(){
@@ -82,6 +87,21 @@ public class Player extends Creature {
         } else {
             return;
         }
+
+
+//        if (ar.x == cb.x + 2){
+//            if(ar.y > cb.y){
+//                System.out.println("XXX down XXX");
+//            } else {
+//                System.out.println("XXX up XXX");
+//            }
+//        } else if (ar.y == cb.y + 2){
+//            if(ar.x > cb.x){
+//                System.out.println("XXX right XXX");
+//            } else {
+//                System.out.println("XXX left XXX");
+//            }
+//        }
 
         attackTimer = 0;
 
@@ -121,6 +141,7 @@ public class Player extends Creature {
                 (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
 
+
         //show bounding box
 
 //        g.setColor(Color.red);
@@ -129,6 +150,10 @@ public class Player extends Creature {
 //                bounds.width, bounds.height);
     }
 
+
+    public void postRender(Graphics g){
+        inventory.render(g);
+    }
 
     private BufferedImage getCurrentAnimationFrame(){
         if (attackString != null){
@@ -161,5 +186,13 @@ public class Player extends Creature {
         } else {
             return Assets.player;
         }
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 }

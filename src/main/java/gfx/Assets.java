@@ -8,24 +8,29 @@ public class Assets {
     private static final int width62 = 62, height62 = 62;
 
 
-    public static BufferedImage player, dirt, grass, stone, sand, stone2, stone3, rock, tree;
+    public static BufferedImage player, dirt, grass, stone, sand, stone2, stone3, rock, tree, wood;
     public static BufferedImage[] playerDown, playerUp, playerLeft, playerRight;
     public static BufferedImage[] playerAttackLeft, playerAttackRight, playerAttackUp, playerAttackDown;
     public static BufferedImage[] startButton;
+    public static BufferedImage inventoryScreen;
 
     public static void init(){
         //SpriteSheet playerSprites = new SpriteSheet(ImageLoader.loadImage("/textures/sprite_sheet.png"));
+        inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
+
         SpriteSheet playerSprites2 = new SpriteSheet(ImageLoader.loadImage("/textures/walking_sprites_right.png"));
         SpriteSheet playerSpritesLeft = new SpriteSheet(ImageLoader.loadImage("/textures/walking_sprites_left.png"));
         SpriteSheet entitySprites = new SpriteSheet(ImageLoader.loadImage("/textures/tree&rock.png"));
         SpriteSheet start = new SpriteSheet(ImageLoader.loadImage("/textures/start_button.png"));
         SpriteSheet attack = new SpriteSheet(ImageLoader.loadImage("/textures/attack_sprites.png"));
+        SpriteSheet woodSheet = new SpriteSheet(ImageLoader.loadImage("/textures/wood.png"));
 
 
 
         SpriteSheet textures = new SpriteSheet(ImageLoader.loadImage("/textures/master-tileset.png"));
 
         player = playerSprites2.crop(0, 0, width32, height32);
+        wood = woodSheet.crop(width32 * 2, 0, width32, height32);
 
         playerDown = new BufferedImage[2];
         playerUp = new BufferedImage[2];

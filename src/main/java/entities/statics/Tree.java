@@ -1,6 +1,7 @@
 package entities.statics;
 
 import gfx.Assets;
+import items.Item;
 import main.Handler;
 import tiles.Tile;
 
@@ -24,7 +25,9 @@ public class Tree extends StaticEntity {
     }
 
     @Override
-    public void die(){}
+    public void die(){
+        handler.getWorld().getItemManager().addItem(Item.woodItem.createNew((int) x, (int) y));
+    }
 
     @Override
     public void render(Graphics g) {
