@@ -13,18 +13,16 @@ public class EntityManager {
     private Handler handler;
     private Player player;
     private ArrayList<Entity> entities;
-    private Comparator<Entity> renderSorter = new Comparator<Entity>() {
-        public int compare(Entity o1, Entity o2) {
-            if(o1.getY() + o1.getHeight() < o2.getY() + o2.getHeight())
-                return -1;
-            return 1;
-        }
+    private Comparator<Entity> renderSorter = (o1, o2) -> {
+        if(o1.getY() + o1.getHeight() < o2.getY() + o2.getHeight())
+            return -1;
+        return 1;
     };
 
     public EntityManager(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
-        entities = new ArrayList<Entity>();
+        entities = new ArrayList<>();
         addEntity(player);
     }
 

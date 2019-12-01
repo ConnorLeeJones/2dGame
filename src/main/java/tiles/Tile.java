@@ -17,6 +17,7 @@ public class Tile {
 
     protected BufferedImage texture;
     protected final int id;
+    protected boolean enemy = false;
 
     public Tile(BufferedImage texture, int id) {
         this.texture = texture;
@@ -24,6 +25,7 @@ public class Tile {
 
         tiles[id] = this;
     }
+
 
     public void tick(){}
 
@@ -38,5 +40,13 @@ public class Tile {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isEnemy() {
+        return enemy;
+    }
+
+    public void setEnemy(boolean enemy) {
+        this.enemy = enemy;
     }
 }

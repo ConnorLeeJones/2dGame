@@ -1,11 +1,6 @@
 package states;
 
-import entities.creatures.Player;
-import entities.statics.Tree;
-import gfx.Assets;
-import main.Game;
 import main.Handler;
-import tiles.Tile;
 import worlds.World;
 
 import java.awt.*;

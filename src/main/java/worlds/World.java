@@ -11,6 +11,7 @@ import tiles.Tile;
 import utils.Utils;
 
 import java.awt.*;
+import java.util.HashMap;
 
 public class World {
 
@@ -19,10 +20,14 @@ public class World {
     private int spawnX, spawnY;
     private int[][] tiles;
 
+
     //entities
     private EntityManager entityManager;
     //items
     private ItemManager itemManager;
+
+    //enemies
+    private HashMap<Integer, Integer> enemyLocations;
 
 
     public World(Handler handler, String path){
@@ -40,6 +45,17 @@ public class World {
 
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
+
+
+        enemyLocations = new HashMap<>();
+        while(enemyLocations.size() < 20){
+            int randX = (int) Math.floor(Math.random() * width);
+            int randY = (int) Math.floor(Math.random() * height);
+            if (!getTile(randX, randY).isSolid()){
+                enemyLocations.put(randX, randY);
+            }
+        }
+        System.out.println(enemyLocations.toString());
 
     }
 
@@ -61,6 +77,9 @@ public class World {
                         (int) (y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
             }
         }
+
+
+
         //items
         itemManager.render(g);
         //entities
@@ -125,5 +144,13 @@ public class World {
 
     public void setHandler(Handler handler) {
         this.handler = handler;
+    }
+
+    public int[][] getTiles() {
+        return tiles;
+    }
+
+    public HashMap<Integer, Integer> getEnemyLocations() {
+        return enemyLocations;
     }
 }

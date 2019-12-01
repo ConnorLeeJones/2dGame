@@ -4,8 +4,8 @@ import entities.Entity;
 import gfx.Animation;
 import gfx.Assets;
 import inventory.Inventory;
-import main.Game;
 import main.Handler;
+
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -140,6 +140,21 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics g) {
+        int tileX = (int) Math.floor(x / 64) + 1;
+        int tileY = (int) Math.floor(y / 64) + 1;
+
+        if(handler.getWorld().getEnemyLocations().get(tileX) != null){
+            if(handler.getWorld().getEnemyLocations().get(tileX) == tileY) {
+                System.out.println("Enemy found");
+                //State.setState(new BattleState(handler));
+            }
+        }
+
+        //System.out.println(tileX + "  " + tileY);
+        //Tile currentTile = Tile.tiles[handler.getWorld().getTiles()[tileX][tileY]];
+        //System.out.println(currentTile.isEnemy());
+        //System.out.println(handler.getWorld().getTile(tileX, tileY));
+
         g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
