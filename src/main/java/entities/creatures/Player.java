@@ -5,11 +5,14 @@ import gfx.Animation;
 import gfx.Assets;
 import inventory.Inventory;
 import main.Handler;
+import stats.StatCreator;
+import stats.Stats;
 
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 public class Player extends Creature {
 
@@ -204,4 +207,6 @@ public class Player extends Creature {
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
+
+
 }
