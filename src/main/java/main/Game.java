@@ -6,6 +6,7 @@ import gfx.Assets;
 import gfx.GameCamera;
 import input.KeyManager;
 import input.MouseManager;
+import states.BattleState;
 import states.GameState;
 import states.MenuState;
 import states.State;
@@ -29,6 +30,8 @@ public class Game implements Runnable {
     //states
     public State gameState;
     public State menuState;
+    public State battleState;
+
 
     //input
     private KeyManager keyManager;
@@ -51,7 +54,6 @@ public class Game implements Runnable {
     }
 
 
-
     private void init(){
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
@@ -67,7 +69,15 @@ public class Game implements Runnable {
 
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
-        State.setState(menuState);
+        battleState = new BattleState(handler, 10);
+
+
+        //battleState = new BattleState(handler, 5);
+        State.setState(new BattleState(handler, 5));
+        //setState(battleState);
+
+
+        //setState(battleState);
     }
 
 

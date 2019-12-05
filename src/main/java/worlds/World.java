@@ -5,8 +5,11 @@ import entities.EntityManager;
 import entities.creatures.Player;
 import entities.statics.Rock;
 import entities.statics.Tree;
+import gfx.Assets;
+import gfx.Text;
 import items.ItemManager;
 import main.Handler;
+import stats.Stats;
 import tiles.Tile;
 import utils.Utils;
 
@@ -77,6 +80,10 @@ public class World {
                         (int) (y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
             }
         }
+
+        Text.drawString(g, entityManager.getPlayer().getStat(Stats.HP) + "/" +
+                        entityManager.getPlayer().getStat(Stats.MAX_HP), 10,
+                30, false, Color.WHITE, Assets.font28);
 
 
 

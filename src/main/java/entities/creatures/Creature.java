@@ -1,11 +1,13 @@
 package entities.creatures;
 
 import entities.Entity;
-import main.Game;
 import main.Handler;
+import stats.StatCreator;
+import stats.Stats;
 import tiles.Tile;
 
-import java.awt.*;
+import java.util.HashMap;
+
 
 public abstract class Creature extends Entity {
 
@@ -15,6 +17,9 @@ public abstract class Creature extends Entity {
 
     protected float speed;
     protected float xMove, yMove;
+
+    protected HashMap<Stats, Integer> stats;
+
 
 
 
@@ -116,5 +121,28 @@ public abstract class Creature extends Entity {
 
     public void setyMove(float yMove) {
         this.yMove = yMove;
+    }
+
+
+
+    //stat getters & setters
+    public void alterStat(Stats stat, Integer value){
+        this.stats.merge(stat, value, Integer::sum);
+    }
+
+    public void setStat(Stats stat, Integer value){
+        this.stats.put(stat, value);
+    }
+
+    public HashMap<Stats, Integer> getStats() {
+        return stats;
+    }
+
+    public void setStats(HashMap<Stats, Integer> stats) {
+        this.stats = stats;
+    }
+
+    public Integer getStat(Stats stat){
+        return this.stats.get(stat);
     }
 }

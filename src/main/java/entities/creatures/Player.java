@@ -5,11 +5,17 @@ import gfx.Animation;
 import gfx.Assets;
 import inventory.Inventory;
 import main.Handler;
+import states.BattleState;
+import states.MenuState;
+import states.State;
+import stats.StatCreator;
+import stats.Stats;
 
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 public class Player extends Creature {
 
@@ -24,6 +30,8 @@ public class Player extends Creature {
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 
+        //stats
+        stats = StatCreator.newPlayerStats();
 
         //players bounding box, customize
         bounds.x = 16;
@@ -146,14 +154,11 @@ public class Player extends Creature {
         if(handler.getWorld().getEnemyLocations().get(tileX) != null){
             if(handler.getWorld().getEnemyLocations().get(tileX) == tileY) {
                 System.out.println("Enemy found");
-                //State.setState(new BattleState(handler));
+                //handler.getGame().setState(new BattleState(handler, 5));
+                handler.getMouseManager().setUiManager(null);
+                State.setState(new BattleState(handler, 3));
             }
         }
-
-        //System.out.println(tileX + "  " + tileY);
-        //Tile currentTile = Tile.tiles[handler.getWorld().getTiles()[tileX][tileY]];
-        //System.out.println(currentTile.isEnemy());
-        //System.out.println(handler.getWorld().getTile(tileX, tileY));
 
         g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
@@ -204,4 +209,6 @@ public class Player extends Creature {
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
+
+
 }
