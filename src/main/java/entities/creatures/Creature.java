@@ -18,7 +18,7 @@ public abstract class Creature extends Entity {
     protected float speed;
     protected float xMove, yMove;
 
-    private HashMap<Stats, Integer> stats = StatCreator.newPlayerStats();
+    protected HashMap<Stats, Integer> stats;
 
 
 
