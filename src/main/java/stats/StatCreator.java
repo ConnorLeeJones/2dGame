@@ -16,10 +16,10 @@ public class StatCreator {
         newStats.put(Stats.SPEED, 10);
         newStats.put(Stats.ACCURACY, 10);
 
-        newStats.put(Stats.HP, 100);
+        newStats.put(Stats.HP, 200);
         newStats.put(Stats.MP, 100);
         newStats.put(Stats.XP, 0);
-        newStats.put(Stats.MAX_HP, 100);
+        newStats.put(Stats.MAX_HP, 200);
         newStats.put(Stats.MAX_MP, 100);
         newStats.put(Stats.MAX_XP, 100);
         newStats.put(Stats.LEVEL, 1);

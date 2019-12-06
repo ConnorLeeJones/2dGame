@@ -38,7 +38,9 @@ public class BattleUtils {
         int roll = d100.roll();
         int level = player.getStat(Stats.LEVEL);
         if (roll <= 25) {
-            return new Goblin(handler, x, y, width, height, level, "Gobo");
+            Goblin g = new Goblin(handler, x, y, width, height, level, "Gobo");
+            System.out.println(g);
+            return g;
         } else if (roll <= 50) {
             return new Wolf(handler, x, y, width, height, level, "Wolf");
         } else if (roll <= 75) {

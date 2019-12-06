@@ -25,10 +25,12 @@ public class Player extends Creature {
     private Animation attackDown, attackUp, attackLeft, attackRight;
     private long lastAttackTimer, attackCooldown = 300, attackTimer = attackCooldown;
 
+    private int tileX, tileY;
+
     private Inventory inventory;
 
     public Player(Handler handler, float x, float y) {
-        super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
+        super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT, "Connor");
 
         //stats
         stats = StatCreator.newPlayerStats();
@@ -50,6 +52,8 @@ public class Player extends Creature {
         attackRight = new Animation(250, Assets.playerAttackRight);
 
         inventory = new Inventory(handler);
+        tileX = (int) Math.floor(x / 64) + 1;
+        tileY = (int) Math.floor(y / 64) + 1;
     }
 
     public void tick() {
@@ -148,8 +152,10 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics g) {
-        int tileX = (int) Math.floor(x / 64) + 1;
-        int tileY = (int) Math.floor(y / 64) + 1;
+//        int tileX = (int) Math.floor(x / 64) + 1;
+//        int tileY = (int) Math.floor(y / 64) + 1;
+        tileX = (int) Math.floor(x / 64) + 1;
+        tileY = (int) Math.floor(y / 64) + 1;
 
         if(handler.getWorld().getEnemyLocations().get(tileX) != null){
             if(handler.getWorld().getEnemyLocations().get(tileX) == tileY) {
@@ -211,4 +217,19 @@ public class Player extends Creature {
     }
 
 
+    public int getTileX() {
+        return tileX;
+    }
+
+    public void setTileX(int tileX) {
+        this.tileX = tileX;
+    }
+
+    public int getTileY() {
+        return tileY;
+    }
+
+    public void setTileY(int tileY) {
+        this.tileY = tileY;
+    }
 }

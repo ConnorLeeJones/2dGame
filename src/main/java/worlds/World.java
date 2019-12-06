@@ -49,18 +49,28 @@ public class World {
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
 
+        placeEnemies();
+    }
 
+    public void placeEnemies(){
         enemyLocations = new HashMap<>();
         while(enemyLocations.size() < 20){
             int randX = (int) Math.floor(Math.random() * width);
             int randY = (int) Math.floor(Math.random() * height);
+            System.out.println("XXX:" + entityManager.getPlayer().getTileX());
+            System.out.println("XXX:" + entityManager.getPlayer().getTileY());
+
             if (!getTile(randX, randY).isSolid()){
-                enemyLocations.put(randX, randY);
+                if(randX == entityManager.getPlayer().getTileX() && randY == entityManager.getPlayer().getTileY()) {
+                    continue;
+                } else {
+                    enemyLocations.put(randX, randY);
+                }
             }
         }
         System.out.println(enemyLocations.toString());
-
     }
+
 
     public void tick(){
         itemManager.tick();
