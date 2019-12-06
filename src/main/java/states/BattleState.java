@@ -4,11 +4,13 @@ import battle.Battle;
 import entities.creatures.monsters.Monster;
 import gfx.Assets;
 import main.Handler;
+import stats.Stats;
 import ui.BattleBox;
 import ui.UIImageButton;
 import ui.UIManager;
 
 import java.awt.*;
+import java.util.Iterator;
 
 public class BattleState extends State {
 
@@ -21,7 +23,7 @@ public class BattleState extends State {
         //uiManager = new UIManager(handler);
         //handler.getMouseManager().setUiManager(uiManager);
         battle = new Battle(handler, handler.getWorld().getEntityManager().getPlayer(), numberOfMonsters);
-        battleBox = new BattleBox(10, 350, handler.getWidth() - 20, 120, null, handler);
+        battleBox = new BattleBox(10, 350, handler.getWidth() - 20, 125, null, handler, battle);
 
     }
 
@@ -31,13 +33,24 @@ public class BattleState extends State {
 
     }
 
+
+
+
     @Override
     public void render(Graphics g) {
         //uiManager.render(g);
+
+        removeDeadCreatures();
+
         for (Monster monster : battle.getMonsters()){
             monster.render(g);
         }
         battleBox.render(g);
+    }
+
+
+    public void removeDeadCreatures(){
+        battle.getMonsters().removeIf(mon -> mon.getStat(Stats.HP) <= 0);
     }
 
 //    public UIManager getUiManager() {

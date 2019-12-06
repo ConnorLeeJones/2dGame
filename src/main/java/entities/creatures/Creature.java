@@ -19,15 +19,17 @@ public abstract class Creature extends Entity {
     protected float xMove, yMove;
 
     protected HashMap<Stats, Integer> stats;
+    private String name;
 
 
 
 
-    public Creature(Handler handler, float x, float y, int width, int height) {
+    public Creature(Handler handler, float x, float y, int width, int height, String name) {
         super(handler, x, y, width, height);
         speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
+        this.name = name;
     }
 
     public void move(){
@@ -144,5 +146,13 @@ public abstract class Creature extends Entity {
 
     public Integer getStat(Stats stat){
         return this.stats.get(stat);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
