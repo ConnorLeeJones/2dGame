@@ -3,6 +3,7 @@ package worlds;
 import entities.Entity;
 import entities.EntityManager;
 import entities.creatures.Player;
+import entities.statics.Jar;
 import entities.statics.Rock;
 import entities.statics.Tree;
 import gfx.Assets;
@@ -42,6 +43,11 @@ public class World {
 
         entityManager.addEntity(new Rock(handler, 200, 350));
         entityManager.addEntity(new Rock(handler, 500, 150));
+
+        entityManager.addEntity(new Jar(handler, 600, 600));
+        entityManager.addEntity(new Jar(handler, 700, 700));
+        entityManager.addEntity(new Jar(handler, 800, 800));
+        entityManager.addEntity(new Jar(handler, 900, 900));
 
 
         loadWorld(path);

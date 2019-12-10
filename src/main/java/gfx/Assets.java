@@ -17,6 +17,7 @@ public class Assets {
     public static BufferedImage[] playerAttackLeft, playerAttackRight, playerAttackUp, playerAttackDown;
     public static BufferedImage[] startButton;
     public static BufferedImage inventoryScreen;
+    public static BufferedImage healthPot, magicPot, jar;
 
     public static void init(){
         //SpriteSheet playerSprites = new SpriteSheet(ImageLoader.loadImage("/textures/sprite_sheet.png"));
@@ -31,6 +32,8 @@ public class Assets {
         SpriteSheet start = new SpriteSheet(ImageLoader.loadImage("/textures/start_button.png"));
         SpriteSheet attack = new SpriteSheet(ImageLoader.loadImage("/textures/attack_sprites.png"));
         SpriteSheet woodSheet = new SpriteSheet(ImageLoader.loadImage("/textures/wood.png"));
+        SpriteSheet potionSheet = new SpriteSheet(ImageLoader.loadImage("/textures/potions.png"));
+        SpriteSheet jarSheet = new SpriteSheet(ImageLoader.loadImage("/textures/jar.png"));
 
 
 
@@ -69,7 +72,9 @@ public class Assets {
 
 
 
-
+        healthPot = potionSheet.crop(width32 * 7, 0, width32, height32);
+        magicPot = potionSheet.crop(width32 * 8, 0, width32, height32);
+        jar = jarSheet.crop(width32 * 8, 0, width32, height32);
 
         rock = entitySprites.crop(width32 * 8, 0, width32, height32);
         tree = entitySprites.crop(width32 * 9, 0, width32, height32);

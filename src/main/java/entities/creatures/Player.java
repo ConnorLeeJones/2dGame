@@ -5,6 +5,9 @@ import gfx.Animation;
 import gfx.Assets;
 import inventory.Inventory;
 import main.Handler;
+import spells.Fireball;
+import spells.Flamethrower;
+import spells.Spell;
 import states.BattleState;
 import states.MenuState;
 import states.State;
@@ -15,6 +18,7 @@ import stats.Stats;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player extends Creature {
@@ -28,6 +32,7 @@ public class Player extends Creature {
     private int tileX, tileY;
 
     private Inventory inventory;
+    private ArrayList<Spell> spellBook = new ArrayList<>();
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT, "Connor");
@@ -54,6 +59,10 @@ public class Player extends Creature {
         inventory = new Inventory(handler);
         tileX = (int) Math.floor(x / 64) + 1;
         tileY = (int) Math.floor(y / 64) + 1;
+
+        spellBook.add(new Fireball(this));
+        spellBook.add(new Flamethrower(this));
+
     }
 
     public void tick() {
@@ -231,5 +240,13 @@ public class Player extends Creature {
 
     public void setTileY(int tileY) {
         this.tileY = tileY;
+    }
+
+    public ArrayList<Spell> getSpellBook() {
+        return spellBook;
+    }
+
+    public void setSpellBook(ArrayList<Spell> spellBook) {
+        this.spellBook = spellBook;
     }
 }

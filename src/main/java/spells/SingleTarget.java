@@ -4,5 +4,5 @@ import entities.creatures.monsters.Monster;
 
 public interface SingleTarget {
 
-    public void cast(Monster monster);
+    public int cast(Monster monster);
 }

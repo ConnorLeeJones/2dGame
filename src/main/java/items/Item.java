@@ -13,6 +13,9 @@ public class Item {
     public static Item[] items = new Item[256];
     public static Item woodItem = new Item(Assets.wood, "Wood", 0);
     public static Item rockItem = new Item(Assets.rock, "Rock", 1);
+    public static Item healthPotion = new Item(Assets.healthPot, "Health Potion", 2);
+    public static Item magicPotion = new Item(Assets.magicPot, "Magic Potion", 3);
+
 
     protected Rectangle bounds;
 
