@@ -1,5 +1,6 @@
 package battle;
 
+import entities.creatures.Creature;
 import entities.creatures.Player;
 import entities.creatures.monsters.*;
 import main.Handler;
@@ -48,6 +49,10 @@ public class BattleUtils {
         } else {
             return new Hobgoblin(handler, x, y, width, height, level, "Hobgoblin");
         }
+    }
+
+    public static void damageCreature(Creature creature, int damage){
+        creature.setStat(Stats.HP, creature.getStat(Stats.HP) - damage);
     }
 
 

@@ -7,6 +7,9 @@ import gfx.Assets;
 import gfx.Text;
 import items.Item;
 import main.Handler;
+import spells.MultiTarget;
+import spells.SingleTarget;
+import spells.Spell;
 import states.State;
 import stats.Stats;
 
@@ -21,13 +24,15 @@ public class BattleBox extends UIObject {
     private BufferedImage[] images;
     private Handler handler;
     private ArrayList<String> choices;
-    private int selectedChoice = 0;
+    private int selectedChoice = 0 , xp = 0;
     private Battle battle;
     private String menu;
     private Player player;
     private int currentMonster = 0;
     private boolean playerTurn = true;
     private ArrayList<String> battleText;
+    private Spell selectedSpell;
+
 
     public BattleBox(float x, float y, int width, int height, BufferedImage[] images, Handler handler, Battle battle) {
         super(x, y, width, height);
@@ -38,6 +43,9 @@ public class BattleBox extends UIObject {
         menu = "choices";
         player = handler.getWorld().getEntityManager().getPlayer();
         battleText = new ArrayList<>();
+        for (Monster monster : battle.getMonsters()){
+            xp += monster.getStat(Stats.XP);
+        }
     }
 
     @Override
@@ -47,6 +55,26 @@ public class BattleBox extends UIObject {
                 playerTurn();
             else
                 monsterTurn();
+        } else {
+            finishBattle();
+        }
+    }
+
+    public void finishBattle(){
+        if(player.getStat(Stats.HP) <= 0){
+            player.setStat(Stats.HP, 100);
+            handler.getWorld().placeEnemies();
+            System.out.println("You lose");
+            State.setState(handler.getGame().gameState);
+        } else {
+            System.out.println(xp + " xp gained.");
+            if (player.getStat(Stats.XP) + xp > player.getStat(Stats.MAX_XP)){
+                player.setStat(Stats.XP, player.getStat(Stats.XP) + xp - player.getStat(Stats.MAX_XP));
+                player.setStat(Stats.MAX_XP, player.getStat(Stats.MAX_XP) * 2);
+                System.out.println("Level up");
+            } else {
+                player.setStat(Stats.XP, player.getStat(Stats.XP) + xp);
+            }
         }
     }
 
@@ -77,6 +105,9 @@ public class BattleBox extends UIObject {
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
             getChoice();
         }
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_Q)) {
+            choices = setUpChoices();
+        }
     }
 
     public void getChoice() {
@@ -89,6 +120,11 @@ public class BattleBox extends UIObject {
                 case "Attack":
                     attack();
                     break;
+                case "Spell":
+                    spell();
+                    break;
+                case "Item":
+                    choices = setUpItems();
                 default:
                     break;
             }
@@ -98,6 +134,57 @@ public class BattleBox extends UIObject {
             + " to " +battle.getMonsters().get(selectedChoice).getName() + ".");
             playerTurn = false;
             choices = setUpChoices();
+        } else if (menu.equalsIgnoreCase("spells")){
+            selectedSpell = player.getSpellBook().get(selectedChoice);
+            if (selectedSpell.getCost() <= player.getStat(Stats.MP)) {
+                if(selectedSpell instanceof SingleTarget) {
+                    choices = setUpMonsterChoices();
+                    menu = "monster spells";
+                } else {
+                    menu = "monster spells";
+                    selectedChoice = 0;
+                    getChoice();
+                }
+
+            } else {
+                battleText.add("Not enough MP");
+                //choices = setUpChoices();
+            }
+        } else if (menu.equalsIgnoreCase("monster spells")) {
+            //selectedChoice = 0;
+            choices = setUpMonsterChoices();
+            //selectedSpell.c
+            if(selectedSpell instanceof SingleTarget){
+                battleText.add(player.getName() + " dealt " +
+                        ((SingleTarget) selectedSpell).cast(battle.getMonsters().get(selectedChoice))
+                + " to " + battle.getMonsters().get(selectedChoice).getName() + ".");
+            } else if (selectedSpell instanceof MultiTarget){
+                battleText.add(player.getName() + " dealt " +
+                        ((MultiTarget) selectedSpell).cast(battle.getMonsters())
+                        + " total damage.");
+            }
+            playerTurn = false;
+            choices = setUpChoices();
+        } else if (menu.equalsIgnoreCase("items")) {
+            if (selectedChoice == 0){
+                if (Item.items[2].getCount() > 0) {
+                    Item.items[2].setCount(Item.items[2].getCount() - 1);
+                    player.setStat(Stats.HP, player.getStat(Stats.MAX_HP));
+                    playerTurn = false;
+                    choices = setUpChoices();
+                } else {
+                    battleText.add("Not enough potions.");
+                }
+            } else if (selectedChoice == 1) {
+                if (Item.items[3].getCount() > 0) {
+                    Item.items[3].setCount(Item.items[3].getCount() - 1);
+                    player.setStat(Stats.MP, player.getStat(Stats.MAX_MP));
+                    playerTurn = false;
+                    choices = setUpChoices();
+                } else {
+                    battleText.add("Not enough potions.");
+                }
+            }
         }
     }
 
@@ -116,6 +203,15 @@ public class BattleBox extends UIObject {
         return choices;
     }
 
+    public ArrayList<String> setUpItems(){
+        selectedChoice = 0;
+        menu = "items";
+        ArrayList<String> choices = new ArrayList<>();
+        choices.add("Health Potion: (" + Item.items[2].getCount() + ")");
+        choices.add("Magic Potion: (" + Item.items[3].getCount() + ")");
+        return choices;
+    }
+
     public ArrayList<String> setUpMonsterChoices(){
         selectedChoice = 0;
         menu = "monsters";
@@ -126,8 +222,24 @@ public class BattleBox extends UIObject {
         return choices;
     }
 
+    public ArrayList<String> setUpSpellChoices(){
+        selectedChoice = 0;
+        menu = "spells";
+        ArrayList<String> choices = new ArrayList<>();
+        for (Spell spell : player.getSpellBook()){
+            choices.add(spell.getClass().getSimpleName());
+        }
+        return choices;
+    }
+
+
+
     protected void attack(){
         choices = setUpMonsterChoices();
+    }
+
+    protected void spell(){
+        choices = setUpSpellChoices();
     }
 
     @Override

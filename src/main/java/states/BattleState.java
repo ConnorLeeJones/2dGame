@@ -34,8 +34,6 @@ public class BattleState extends State {
     }
 
 
-
-
     @Override
     public void render(Graphics g) {
         //uiManager.render(g);

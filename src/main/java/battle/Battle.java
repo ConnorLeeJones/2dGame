@@ -36,10 +36,10 @@ public class Battle {
 
     public boolean checkConditions(){
         if(player.getStat(Stats.HP) <= 0){
-            player.setStat(Stats.HP, 100);
-            handler.getWorld().placeEnemies();
-            System.out.println("You lose");
-            State.setState(handler.getGame().gameState);
+//            player.setStat(Stats.HP, 100);
+//            handler.getWorld().placeEnemies();
+//            System.out.println("You lose");
+//            State.setState(handler.getGame().gameState);
             return true;
         } else if (getTotalMonsterHp() <= 0){
             System.out.println(getTotalMonsterHp());
