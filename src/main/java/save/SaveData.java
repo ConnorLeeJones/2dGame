@@ -15,19 +15,65 @@ public class SaveData implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    public int tileX, tileY;
+    private float x, y;
 
     //public Inventory inventory;
-    public ArrayList<Spell> spellBook;
-    public String name;
-    public HashMap<Stats, Integer> stats;
+    private ArrayList<Spell> spellBook;
+    private String name;
+    private HashMap<Stats, Integer> stats;
 
     public SaveData(Player player) {
-        this.tileX = player.getTileX();
-        this.tileY = player.getTileY();
+        this.x = player.getX();
+        this.y = player.getY();
         //this.spellBook = player.getSpellBook();
         this.name = player.getName();
         this.stats = player.getStats();
         //this.inventory = player.getInventory();
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+
+
+    public ArrayList<Spell> getSpellBook() {
+        return spellBook;
+    }
+
+    public void setSpellBook(ArrayList<Spell> spellBook) {
+        this.spellBook = spellBook;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public HashMap<Stats, Integer> getStats() {
+        return stats;
+    }
+
+    public void setStats(HashMap<Stats, Integer> stats) {
+        this.stats = stats;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
     }
 }
