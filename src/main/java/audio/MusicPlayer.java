@@ -1,7 +1,7 @@
 package audio;
 
 import javax.sound.sampled.*;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 
 public class MusicPlayer implements Runnable {
@@ -14,14 +14,11 @@ public class MusicPlayer implements Runnable {
         this.musicFiles = new ArrayList<>();
         for(String file: files){
             musicFiles.add("/Users/connorjones/Documents/GitHub/Tile/src/res/audio/" + file + ".wav");
-            //audio/GameMusic1.wav
-            //Users/connorjones/Documents/GitHub/Tile/src/res/audio/GameMusic1.wav
-            //Users/connorjones/Documents/GitHub/Tile/src/main/resources/audio/GameMusic1.wav
         }
     }
 
 
-    private void playSound(String fileName){
+    private void loopSound(String fileName){
         try {
             File soundFile = new File(fileName);
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundFile);
@@ -32,16 +29,37 @@ public class MusicPlayer implements Runnable {
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(-10);
             clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
 
+    public void playMusic(String location){
+
+        try {
+            File musicPath = new File(location);
+
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+                //clip.
+            } else {
+                System.out.println("File not found");
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+
     @Override
     public void run() {
-        while (true) {
-            playSound(musicFiles.get(currentSongIndex));
-        }
+        loopSound(musicFiles.get(currentSongIndex));
     }
 }
