@@ -4,11 +4,12 @@ import entities.creatures.Player;
 import main.Handler;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 
-public class EntityManager {
+public class EntityManager implements Serializable {
 
     private Handler handler;
     private Player player;

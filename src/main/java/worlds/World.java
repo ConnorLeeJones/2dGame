@@ -3,9 +3,7 @@ package worlds;
 import entities.Entity;
 import entities.EntityManager;
 import entities.creatures.Player;
-import entities.statics.Jar;
-import entities.statics.Rock;
-import entities.statics.Tree;
+import entities.statics.*;
 import gfx.Assets;
 import gfx.Text;
 import items.ItemManager;
@@ -15,9 +13,10 @@ import tiles.Tile;
 import utils.Utils;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class World {
+public class World implements Serializable {
 
     private Handler handler;
     private int width, height;
@@ -44,10 +43,13 @@ public class World {
         entityManager.addEntity(new Rock(handler, 200, 350));
         entityManager.addEntity(new Rock(handler, 500, 150));
 
-        entityManager.addEntity(new Jar(handler, 600, 600));
-        entityManager.addEntity(new Jar(handler, 700, 700));
-        entityManager.addEntity(new Jar(handler, 800, 800));
-        entityManager.addEntity(new Jar(handler, 900, 900));
+        entityManager.addEntity(new EmptyJar(handler, 600, 600));
+        entityManager.addEntity(new HealthJar(handler, 700, 700));
+        entityManager.addEntity(new HealthJar(handler, 800, 800));
+        entityManager.addEntity(new MagicJar(handler, 900, 900));
+        entityManager.addEntity(new MagicJar(handler, 1000, 1000));
+        entityManager.addEntity(new EmptyJar(handler, 1100, 1100));
+
 
 
         loadWorld(path);

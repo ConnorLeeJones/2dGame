@@ -7,9 +7,10 @@ import main.Handler;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Inventory {
+public class Inventory implements Serializable {
 
     private Handler handler;
     private boolean active = false;
@@ -86,6 +87,22 @@ public class Inventory {
             }
         }
         inventoryItems.add(item);
+    }
+
+    public void removeItem(Item item){
+        for (Item i : inventoryItems){
+            if(i.getId() == item.getId())
+                i.setCount(i.getCount() - 1);
+        }
+    }
+
+    public int getItemCount(Item item){
+        for (Item i : inventoryItems){
+            if(i.getId() == item.getId()){
+                return i.getCount();
+            }
+        }
+        return 0;
     }
 
 

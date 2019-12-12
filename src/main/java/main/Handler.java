@@ -5,7 +5,9 @@ import input.KeyManager;
 import input.MouseManager;
 import worlds.World;
 
-public class Handler {
+import java.io.Serializable;
+
+public class Handler implements Serializable {
 
     private Game game;
     private World world;

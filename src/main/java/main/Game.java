@@ -6,15 +6,14 @@ import gfx.Assets;
 import gfx.GameCamera;
 import input.KeyManager;
 import input.MouseManager;
-import states.BattleState;
-import states.GameState;
-import states.MenuState;
-import states.State;
+import states.*;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
+import java.io.Serializable;
 
-public class Game implements Runnable {
+public class Game implements Runnable, Serializable {
 
     private Display display;
     private int width, height;
@@ -23,7 +22,6 @@ public class Game implements Runnable {
     private boolean running = false;
     private Thread thread;
 
-    private BufferStrategy bs;
     private Graphics g;
 
 
@@ -31,6 +29,7 @@ public class Game implements Runnable {
     public State gameState;
     public State menuState;
     public State battleState;
+    public State saveState;
 
 
     //input
@@ -70,10 +69,13 @@ public class Game implements Runnable {
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
         battleState = new BattleState(handler, 10);
+        //saveState = new SaveState(handler);
 
 
         //battleState = new BattleState(handler, 5);
-        State.setState(new BattleState(handler, 5));
+
+        //State.setState(new BattleState(handler, 5));
+        State.setState(menuState);
         //setState(battleState);
 
 
@@ -88,10 +90,14 @@ public class Game implements Runnable {
         if(State.getState() != null){
             State.getState().tick();
         }
+
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_Q)){
+            State.setState(new SaveState(handler));
+        }
     }
 
     private void render(){
-        bs = display.getCanvas().getBufferStrategy();
+        BufferStrategy bs = display.getCanvas().getBufferStrategy();
         if(bs == null){
             display.getCanvas().createBufferStrategy(3);
             return;

@@ -9,9 +9,10 @@ import states.State;
 import stats.Stats;
 import utils.Dice;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Battle {
+public class Battle implements Serializable {
 
     private Handler handler;
     private Player player;

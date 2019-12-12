@@ -5,6 +5,7 @@ import entities.creatures.Player;
 import entities.creatures.monsters.Monster;
 import gfx.Assets;
 import gfx.Text;
+import inventory.Inventory;
 import items.Item;
 import main.Handler;
 import spells.MultiTarget;
@@ -167,8 +168,8 @@ public class BattleBox extends UIObject {
             choices = setUpChoices();
         } else if (menu.equalsIgnoreCase("items")) {
             if (selectedChoice == 0){
-                if (Item.items[2].getCount() > 0) {
-                    Item.items[2].setCount(Item.items[2].getCount() - 1);
+                if (player.getInventory().getItemCount(Item.healthPotion) > 0) {
+                    player.getInventory().removeItem(Item.healthPotion);
                     player.setStat(Stats.HP, player.getStat(Stats.MAX_HP));
                     playerTurn = false;
                     choices = setUpChoices();
@@ -176,8 +177,8 @@ public class BattleBox extends UIObject {
                     battleText.add("Not enough potions.");
                 }
             } else if (selectedChoice == 1) {
-                if (Item.items[3].getCount() > 0) {
-                    Item.items[3].setCount(Item.items[3].getCount() - 1);
+                if (player.getInventory().getItemCount(Item.magicPotion) > 0) {
+                    player.getInventory().removeItem(Item.magicPotion);
                     player.setStat(Stats.MP, player.getStat(Stats.MAX_MP));
                     playerTurn = false;
                     choices = setUpChoices();
@@ -207,8 +208,8 @@ public class BattleBox extends UIObject {
         selectedChoice = 0;
         menu = "items";
         ArrayList<String> choices = new ArrayList<>();
-        choices.add("Health Potion: (" + Item.items[2].getCount() + ")");
-        choices.add("Magic Potion: (" + Item.items[3].getCount() + ")");
+        choices.add("Health Potion: (" + player.getInventory().getItemCount(Item.healthPotion) + ")");
+        choices.add("Magic Potion: (" + player.getInventory().getItemCount(Item.magicPotion) + ")");
         return choices;
     }
 
