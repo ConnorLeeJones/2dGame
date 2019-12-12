@@ -13,10 +13,9 @@ import tiles.Tile;
 import utils.Utils;
 
 import java.awt.*;
-import java.io.Serializable;
 import java.util.HashMap;
 
-public class World implements Serializable {
+public class World {
 
     private Handler handler;
     private int width, height;

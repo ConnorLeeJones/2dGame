@@ -6,7 +6,7 @@ import main.Handler;
 import java.awt.*;
 import java.io.Serializable;
 
-public abstract class State implements Serializable {
+public abstract class State {
 
 
     private static State currentState = null;

@@ -6,7 +6,7 @@ import main.Handler;
 import java.awt.*;
 import java.io.Serializable;
 
-public abstract class Entity implements Serializable {
+public abstract class Entity {
 
     protected Handler handler;
     protected float x, y;

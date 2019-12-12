@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
-public class BattleUtils implements Serializable {
+public class BattleUtils {
 
 
     private Handler handler;

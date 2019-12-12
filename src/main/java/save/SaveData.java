@@ -1,9 +1,6 @@
 package save;
 
 import entities.creatures.Player;
-import inventory.Inventory;
-import items.InventorySaveData;
-import main.Game;
 import spells.Spell;
 import stats.Stats;
 

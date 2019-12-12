@@ -3,9 +3,7 @@ package spells;
 import entities.creatures.Player;
 import stats.Stats;
 
-import java.io.Serializable;
-
-public abstract class Spell implements Serializable {
+public abstract class Spell {
 
     private Element element;
     private int cost;

@@ -12,7 +12,7 @@ import utils.Dice;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Battle implements Serializable {
+public class Battle {
 
     private Handler handler;
     private Player player;

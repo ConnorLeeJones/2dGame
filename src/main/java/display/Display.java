@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import java.awt.*;
 import java.io.Serializable;
 
-public class Display implements Serializable {
+public class Display {
 
     private JFrame frame;
     private Canvas canvas;

@@ -2,13 +2,12 @@ package inventory;
 
 import gfx.Assets;
 import gfx.Text;
-import items.InventorySaveData;
+import save.InventorySaveData;
 import items.Item;
 import main.Handler;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Inventory {
