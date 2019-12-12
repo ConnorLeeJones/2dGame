@@ -9,18 +9,18 @@ import utils.Dice;
 
 public class Fireball extends Spell implements SingleTarget {
 
-    public Fireball(Player player) {
-        super(Element.FIRE, 10, player);
+    public Fireball() {
+        super(Element.FIRE, 10);
     }
 
 
     @Override
-    public int cast(Monster monster) {
+    public int cast(Monster monster, Player player) {
 
-        if(getPlayer().getStat(Stats.MP) >= getCost()) {
+        if(player.getStat(Stats.MP) >= getCost()) {
             Dice dice = new Dice(20);
-            int damage = dice.roll() + 10 + getPlayer().getStat(Stats.MANA);
-            getPlayer().setStat(Stats.MP, getPlayer().getStat(Stats.MP) - getCost());
+            int damage = dice.roll() + 10 + player.getStat(Stats.MANA);
+            player.setStat(Stats.MP, player.getStat(Stats.MP) - getCost());
             BattleUtils.damageCreature(monster, damage);
             return damage;
         } else {

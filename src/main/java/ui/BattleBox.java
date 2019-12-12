@@ -157,11 +157,11 @@ public class BattleBox extends UIObject {
             //selectedSpell.c
             if(selectedSpell instanceof SingleTarget){
                 battleText.add(player.getName() + " dealt " +
-                        ((SingleTarget) selectedSpell).cast(battle.getMonsters().get(selectedChoice))
+                        ((SingleTarget) selectedSpell).cast(battle.getMonsters().get(selectedChoice), player)
                 + " to " + battle.getMonsters().get(selectedChoice).getName() + ".");
             } else if (selectedSpell instanceof MultiTarget){
                 battleText.add(player.getName() + " dealt " +
-                        ((MultiTarget) selectedSpell).cast(battle.getMonsters())
+                        ((MultiTarget) selectedSpell).cast(battle.getMonsters(), player)
                         + " total damage.");
             }
             playerTurn = false;

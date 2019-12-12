@@ -13,10 +13,9 @@ import tiles.Tile;
 import utils.Utils;
 
 import java.awt.*;
-import java.io.Serializable;
 import java.util.HashMap;
 
-public class World implements Serializable {
+public class World {
 
     private Handler handler;
     private int width, height;
@@ -49,6 +48,13 @@ public class World implements Serializable {
         entityManager.addEntity(new MagicJar(handler, 900, 900));
         entityManager.addEntity(new MagicJar(handler, 1000, 1000));
         entityManager.addEntity(new EmptyJar(handler, 1100, 1100));
+
+
+        entityManager.addEntity(new HealthJar(handler, 800, 700));
+        entityManager.addEntity(new MagicJar(handler, 900, 700));
+
+        entityManager.addEntity(new HealthJar(handler, 800, 600));
+        entityManager.addEntity(new MagicJar(handler, 900, 600));
 
 
 

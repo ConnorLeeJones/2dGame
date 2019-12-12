@@ -2,15 +2,15 @@ package inventory;
 
 import gfx.Assets;
 import gfx.Text;
+import save.InventorySaveData;
 import items.Item;
 import main.Handler;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Inventory implements Serializable {
+public class Inventory {
 
     private Handler handler;
     private boolean active = false;
@@ -50,6 +50,27 @@ public class Inventory implements Serializable {
         else if (selectedItem >= inventoryItems.size())
             selectedItem = 0;
     }
+
+
+    public ArrayList<InventorySaveData> saveInventory(){
+        ArrayList<InventorySaveData> saveData = new ArrayList<>();
+        for (Item i : inventoryItems) {
+            InventorySaveData data = new InventorySaveData(i.getId(), i.getCount());
+            saveData.add(data);
+            System.out.println(data.toString());
+        }
+        return saveData;
+    }
+
+    public void loadInventoryData(ArrayList<InventorySaveData> data){
+        for (InventorySaveData i : data){
+            Item item = Item.items[i.getId()];
+            item.setCount(i.getCount());
+            addItem(item);
+        }
+    }
+
+
 
     public void render(Graphics g){
         if(!active)

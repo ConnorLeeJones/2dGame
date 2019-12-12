@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 
-public class EntityManager implements Serializable {
+public class EntityManager {
 
     private Handler handler;
     private Player player;

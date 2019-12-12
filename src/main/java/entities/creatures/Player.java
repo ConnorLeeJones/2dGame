@@ -60,8 +60,8 @@ public class Player extends Creature {
         tileX = (int) Math.floor(x / 64) + 1;
         tileY = (int) Math.floor(y / 64) + 1;
 
-        spellBook.add(new Fireball(this));
-        spellBook.add(new Flamethrower(this));
+        spellBook.add(new Fireball());
+        spellBook.add(new Flamethrower());
 
     }
 

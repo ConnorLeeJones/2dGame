@@ -2,9 +2,8 @@ package ui;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.io.Serializable;
 
-public abstract class UIObject implements Serializable {
+public abstract class UIObject {
 
     protected float x, y;
     protected int width, height;
