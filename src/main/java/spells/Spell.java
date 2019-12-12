@@ -9,22 +9,14 @@ public abstract class Spell implements Serializable {
 
     private Element element;
     private int cost;
-    private Player player;
 
-    public Spell(){}
-
-    public Spell(Element element, int cost, Player player){
+    public Spell(Element element, int cost){
         this.element = element;
         this.cost = cost;
-        this.player = player;
     }
 
-
-
-
-
-    public boolean canCast() {
-        return getPlayer().getStat(Stats.MP) >= getCost();
+    public boolean canCast(Player player) {
+        return player.getStat(Stats.MP) >= getCost();
     }
 
 
@@ -44,11 +36,4 @@ public abstract class Spell implements Serializable {
         this.cost = cost;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 }

@@ -2,6 +2,7 @@ package save;
 
 import entities.creatures.Player;
 import inventory.Inventory;
+import items.InventorySaveData;
 import main.Game;
 import spells.Spell;
 import stats.Stats;
@@ -17,7 +18,7 @@ public class SaveData implements Serializable {
 
     private float x, y;
 
-    //public Inventory inventory;
+    private ArrayList<InventorySaveData> inventorySaveData;
     private ArrayList<Spell> spellBook;
     private String name;
     private HashMap<Stats, Integer> stats;
@@ -25,10 +26,10 @@ public class SaveData implements Serializable {
     public SaveData(Player player) {
         this.x = player.getX();
         this.y = player.getY();
-        //this.spellBook = player.getSpellBook();
+        this.spellBook = player.getSpellBook();
         this.name = player.getName();
         this.stats = player.getStats();
-        //this.inventory = player.getInventory();
+        this.inventorySaveData = player.getInventory().saveInventory();
     }
 
     public static long getSerialVersionUID() {
@@ -75,5 +76,13 @@ public class SaveData implements Serializable {
 
     public void setY(float y) {
         this.y = y;
+    }
+
+    public ArrayList<InventorySaveData> getInventorySaveData() {
+        return inventorySaveData;
+    }
+
+    public void setInventorySaveData(ArrayList<InventorySaveData> inventorySaveData) {
+        this.inventorySaveData = inventorySaveData;
     }
 }

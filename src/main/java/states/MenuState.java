@@ -39,6 +39,8 @@ public class MenuState extends State{
                 player.setY(data.getY());
                 player.setName(data.getName());
                 player.setStats(data.getStats());
+                player.setSpellBook(data.getSpellBook());
+                player.getInventory().loadInventoryData(data.getInventorySaveData());
             } catch (Exception e) {
                 e.printStackTrace();
             }

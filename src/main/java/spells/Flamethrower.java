@@ -11,18 +11,18 @@ import java.util.ArrayList;
 public class Flamethrower extends Spell implements MultiTarget {
 
 
-    public Flamethrower(Player player) {
-        super(Element.FIRE, 20, player);
+    public Flamethrower() {
+        super(Element.FIRE, 20);
     }
 
     @Override
-    public int cast(ArrayList<Monster> monsters) {
-        if(canCast()) {
+    public int cast(ArrayList<Monster> monsters, Player player) {
+        if(canCast(player)) {
             int totalDamage = 0;
             Dice dice = new Dice(10);
-            getPlayer().setStat(Stats.MP, getPlayer().getStat(Stats.MP) - getCost());
+            player.setStat(Stats.MP, player.getStat(Stats.MP) - getCost());
             for (Monster monster : monsters) {
-                int damage = dice.roll() + 5 + getPlayer().getStat(Stats.MANA);
+                int damage = dice.roll() + 5 + player.getStat(Stats.MANA);
                 BattleUtils.damageCreature(monster, damage);
                 totalDamage += damage;
             }
