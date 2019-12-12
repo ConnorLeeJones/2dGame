@@ -4,8 +4,9 @@ import main.Game;
 import main.Handler;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class State {
+public abstract class State implements Serializable {
 
 
     private static State currentState = null;

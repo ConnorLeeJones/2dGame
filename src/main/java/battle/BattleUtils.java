@@ -7,11 +7,12 @@ import main.Handler;
 import stats.Stats;
 import utils.Dice;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
-public class BattleUtils {
+public class BattleUtils implements Serializable {
 
 
     private Handler handler;

@@ -2,8 +2,9 @@ package display;
 
 import javax.swing.JFrame;
 import java.awt.*;
+import java.io.Serializable;
 
-public class Display {
+public class Display implements Serializable {
 
     private JFrame frame;
     private Canvas canvas;

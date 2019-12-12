@@ -1,8 +1,9 @@
 package gfx;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class Animation {
+public class Animation implements Serializable {
 
     private int speed, index;
     private long lastTime, timer;

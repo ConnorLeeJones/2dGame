@@ -7,7 +7,7 @@ import tiles.Tile;
 
 import java.awt.*;
 
-public class Jar extends StaticEntity {
+public abstract class Jar extends StaticEntity {
 
     public Jar(Handler handler, float x, float y) {
         super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
@@ -24,16 +24,6 @@ public class Jar extends StaticEntity {
 
     }
 
-    @Override
-    public void die(){
-        int rand = (int) (Math.random() * 3 + 1);
-        System.out.println(rand);
-        if (rand == 1){
-            handler.getWorld().getItemManager().addItem(Item.magicPotion.createNew((int) x, (int) y));
-        } else if (rand == 2){
-            handler.getWorld().getItemManager().addItem(Item.healthPotion.createNew((int) x, (int) y));
-        }
-    }
 
     @Override
     public void render(Graphics g) {
