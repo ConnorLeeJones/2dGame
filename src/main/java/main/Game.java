@@ -30,6 +30,8 @@ public class Game implements Runnable, Serializable {
     public State menuState;
     public State battleState;
     public State saveState;
+    public State altBattleState;
+    public State textState;
 
 
     //input
@@ -69,12 +71,17 @@ public class Game implements Runnable, Serializable {
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
         battleState = new BattleState(handler, 10);
+        textState = new TextState(handler, "Hello");
         //saveState = new SaveState(handler);
 
 
         //battleState = new BattleState(handler, 5);
 
         //State.setState(new BattleState(handler, 5));
+
+        altBattleState = new AltBattleState(handler, 5);
+        //State.setState(altBattleState);
+
         State.setState(menuState);
         //setState(battleState);
 
