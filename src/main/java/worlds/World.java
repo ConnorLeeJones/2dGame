@@ -2,6 +2,7 @@ package worlds;
 
 import entities.Entity;
 import entities.EntityManager;
+import entities.creatures.NPC;
 import entities.creatures.Player;
 import entities.statics.*;
 import gfx.Assets;
@@ -55,7 +56,7 @@ public class World {
 
         entityManager.addEntity(new HealthJar(handler, 800, 600));
         entityManager.addEntity(new MagicJar(handler, 900, 600));
-
+        entityManager.addEntity(new NPC(handler, 1000, 600, 64, 64, "NPC1", "Hello"));
 
 
         loadWorld(path);

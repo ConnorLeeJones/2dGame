@@ -22,6 +22,7 @@ public class BattleState extends State {
         super(handler);
         //uiManager = new UIManager(handler);
         //handler.getMouseManager().setUiManager(uiManager);
+        this.musicIndex = 1;
         battle = new Battle(handler, handler.getWorld().getEntityManager().getPlayer(), numberOfMonsters);
         battleBox = new BattleBox(10, 350, handler.getWidth() - 20, 125, null, handler, battle);
 

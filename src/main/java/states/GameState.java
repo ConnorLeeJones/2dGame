@@ -1,5 +1,6 @@
 package states;
 
+import audio.MusicPlayer;
 import main.Handler;
 import worlds.World;
 
@@ -13,6 +14,8 @@ public class GameState extends State {
 
     public GameState(Handler handler) {
         super(handler);
+        //this.music = "overworld theme 1";
+        this.musicIndex = 3;
         world = new World(handler, "src/res/worlds/world1.txt");
         handler.setWorld(world);
     }
