@@ -10,11 +10,13 @@ public class Launcher {
         ExecutorService pool = Executors.newFixedThreadPool(2);
 
         Game game = new Game("Game", 640, 480);
-        MusicPlayer musicPlayer = new MusicPlayer("GameMusic1");
 
+        //MusicPlayer musicPlayer = new MusicPlayer("GameMusic1");
+        //musicPlayer.run();
+        MusicPlayer.getINSTANCE().run();
 
         game.start();
-        musicPlayer.run();
+
 
 
 //        pool.execute(game);

@@ -3,18 +3,31 @@ package audio;
 import javax.sound.sampled.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MusicPlayer implements Runnable {
 
 
     private ArrayList<String> musicFiles;
     private int currentSongIndex;
+    private Clip clip;
+
+    private static String[] songs = {"WaterTheme1", "battle music 1", "GameMusic1", "overworld theme 1"};
+
+    private static final MusicPlayer INSTANCE = new MusicPlayer(songs);
+
+
+
 
     public MusicPlayer(String... files) {
         this.musicFiles = new ArrayList<>();
         for(String file: files){
             musicFiles.add("/Users/connorjones/Documents/GitHub/Tile/src/res/audio/" + file + ".wav");
         }
+    }
+
+    public static MusicPlayer getINSTANCE() {
+        return INSTANCE;
     }
 
 
@@ -28,8 +41,9 @@ public class MusicPlayer implements Runnable {
             clip.open(ais);
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(-10);
-            clip.start();
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            this.clip = clip;
+            //clip.start();
+            //clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -60,6 +74,26 @@ public class MusicPlayer implements Runnable {
 
     @Override
     public void run() {
+        //loopSound(musicFiles.get(currentSongIndex));
+        //clip.close();
+        loopSong();
+    }
+
+    public void loopSong(){
         loopSound(musicFiles.get(currentSongIndex));
+        clip.start();
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+
+
+    public int getCurrentSongIndex() {
+        return currentSongIndex;
+    }
+
+    public void setCurrentSongIndex(int currentSongIndex) {
+        this.currentSongIndex = currentSongIndex;
+        clip.stop();
+        loopSong();
     }
 }

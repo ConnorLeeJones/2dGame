@@ -1,5 +1,6 @@
 package states;
 
+import audio.MusicPlayer;
 import entities.creatures.Player;
 import gfx.Assets;
 import main.Game;
@@ -20,6 +21,8 @@ public class MenuState extends State{
 
     public MenuState(Handler handler) {
         super(handler);
+        this.music = "WaterTheme1";
+
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUiManager(uiManager);
 
